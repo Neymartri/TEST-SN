@@ -8,9 +8,14 @@ const db = require('./db')
 
 const app = express();
 
+app.use(express.json()) //request body
 app.use(cors());
 // middleware for route handling via morgan 
  app.use(express.json());
+
+// Register and Login Routes 
+
+app.use("/auth", require("./routes/userAuth"))
 
 // Get all events route via async
 app.get("/api/v1/events", async (req, res) => {
