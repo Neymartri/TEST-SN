@@ -8,10 +8,10 @@ const db = require('./db')
 
 const app = express();
 
-app.use(express.json()) //request body
+
 app.use(cors());
 // middleware for route handling via morgan 
- app.use(express.json());
+app.use(express.json());//request body
 
 // Register and Login Routes 
 
