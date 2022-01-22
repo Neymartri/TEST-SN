@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const pool = require("../db");
-// const validInfo = require("../middleware/validInfo");
+const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 // const authorize = require("../middleware/authorize");
 
 //Authorization
 
-router.post("/register", async (req, res) => {
+
+router.post("/register", validInfo, async (req, res) => {
   const { email, name, password } = req.body;
 
   try {
@@ -41,7 +42,9 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+
+//login route
+router.post("/login", validInfo,async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -67,7 +70,7 @@ router.post("/login", async (req, res) => {
     //give the jwt token
     const jwtToken = jwtGenerator(user.rows[0].user_id);
     return res.json({ jwtToken });
-    
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
