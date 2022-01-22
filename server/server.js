@@ -15,7 +15,7 @@ app.use(express.json());//request body
 
 // Register and Login Routes 
 
-app.use("/auth", require("./routes/userAuth"))
+app.use("/auth", require("./routes/jwtAuth"))
 
 // Get all events route via async
 app.get("/api/v1/events", async (req, res) => {
